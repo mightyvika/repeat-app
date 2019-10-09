@@ -7,18 +7,19 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
     categories: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'WordCategory'
     }],
-    created_at: {
-        type: Date,
-        default: Date()
-    },
-    updated_at: {
-        type: Date,
-        default: Date()
-    }
 });
 
-module.exports = User = mongoose.model('User', UserSchema);
+module.exports = User = mongoose.model('user', UserSchema);

@@ -17,4 +17,4 @@ const WordCategorySchema = new Schema({
     }
 });
 
-module.exports = WordCategory = mongoose.model('WordCategory', WordCategorySchema);
+module.exports = WordCategory = mongoose.model('wordCategory', WordCategorySchema);

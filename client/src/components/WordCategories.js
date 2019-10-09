@@ -2,6 +2,7 @@ import React from 'react';
 import { MdCheckCircle as Check } from "react-icons/md";
 import { connect } from 'react-redux';
 import { getWordCategories } from "../actions/wordCategoriesActions";
+import { toggleUserCategory } from "../actions/userActions";
 import PropTypes from 'prop-types';
 
 import './WordCategories.css';
@@ -20,6 +21,10 @@ class WordCategories extends React.Component{
         this.props.getWordCategories();
     }
 
+    onToggleCategory = (categoryId) => {
+        this.props.toggleUserCategory('1', categoryId);
+    }
+
     // toggleUserCategory = (itemId) => {
     //     let userCategories;
     //     if (this.state.userCategories.includes(itemId)){
@@ -31,13 +36,13 @@ class WordCategories extends React.Component{
     // };
 
     render() {
-        let categoriesItems;
+        let { wordCategories } = this.props.wordCategories;
         console.log(this.props, this.props.item);
         return (
             <div>
-                {this.props.wordCategories.wordCategories.map((item) =>
+                {wordCategories.map((item) =>
                     (<div>
-                        <div className="category-item">
+                        <div className="category-item" onClick={this.onToggleCategory.bind(this, item.id)}>
                             <div className="category-item__icon"><img src="../../logo192.png"/></div>
                             <div>{item.name}</div>
                         </div>
@@ -58,4 +63,4 @@ const mapStateToProps = (state) => {
     return {wordCategories: state.wordCategories}
 };
 
-export default connect(mapStateToProps, { getWordCategories })(WordCategories);
+export default connect(mapStateToProps, { getWordCategories, toggleUserCategory })(WordCategories);
