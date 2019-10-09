@@ -1,13 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 
 const app = express();
 
-
-
-// Bodyparser Middleware
-app.use(bodyParser.json());
+app.use(express.json());
 
 //DB Config
 
@@ -16,7 +12,7 @@ const db = require('./config/keys').mongoURI;
 //Connect to Mongo
 
 mongoose
-    .connect(db)
+    .connect(db, { useNewUrlParser: true, useCreateIndex: true })
     .then(() => console.log('connecter'))
     .catch(err => console.log(err));
 

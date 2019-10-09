@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 // @route POST api/words
 // @desc Create All Words
 // @access Public
-router.get('/', (req, res) => {
+router.post('/', (req, res) => {
     Word.find()
         .sort({ created_at: -1 })
         .then(words => res.json(words))
