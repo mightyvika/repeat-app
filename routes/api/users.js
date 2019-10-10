@@ -41,13 +41,22 @@ router.post('/', (req, res) => {
                     newUser.password = hash;
                     newUser.save()
                         .then(user => {
-                            res.json({
-                                user: {
-                                    id: user.id,
-                                    name: user.name,
-                                    email: user.email
+                            jwt.sign(
+                                {id: user.id},
+                                require('./config/keys').JWTSecret,
+                                {expiresIn: 36000},
+                                (err, token) => {
+                                    if (err) throw err;
+                                    res.json({
+                                        token,
+                                        user: {
+                                            id: user.id,
+                                            name: user.name,
+                                            email: user.email
+                                        }
+                                    })
                                 }
-                            })
+                            );
                         })
                 })
             })
