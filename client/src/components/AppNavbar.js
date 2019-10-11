@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MdSettings as Settings, MdSettingsEthernet as Learning, MdFormatListBulleted as Categories, MdShowChart as Statistics, MdPersonAdd } from "react-icons/md";
 import RegistrationModal from './auth/RegistrationModal';
+import Logout from './auth/Logout';
 
 import './AppNavbar.css';
 
@@ -10,7 +11,10 @@ function AppNavbar() {
         <nav>
             <ul className="menu-nav">
                 <li className="menu-nav__icon">
-                    <RegistrationModal><MdPersonAdd /></RegistrationModal>
+                    <RegistrationModal />
+                </li>
+                <li className="menu-nav__icon">
+                    <Logout />
                 </li>
                 <li className="menu-nav__icon">
                     <Link to="/"><Learning /></Link>

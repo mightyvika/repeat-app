@@ -14,13 +14,20 @@ class RegistrationModal extends React.Component {
     };
 
     componentDidUpdate(prevProps) {
-        const { error } = this.props;
+        const { error, isAuthenticated } = this.props;
         if (error !== prevProps.error) {
             if(error.id === 'REGISTER_FAIL') {
                 this.setState({message: error.message.message})
             } else {
                 this.setState({message: null});
             }
+        }
+
+        if (this.state.modal) {
+            if (isAuthenticated) {
+                this.toggle();
+            }
+
         }
     }
 
@@ -35,8 +42,9 @@ class RegistrationModal extends React.Component {
     };
 
     onChange = e => {
+        console.log(e.target)
         this.setState({
-            [e.target.name]: e.target.modal
+            [e.target.name]: e.target.value
         })
     };
 
@@ -44,6 +52,7 @@ class RegistrationModal extends React.Component {
         e.preventDefault();
 
         const { name, email, password } = this.state;
+        console.log(name, email, password)
         const newUser = {
             name,
             email,
