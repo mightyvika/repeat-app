@@ -5,11 +5,11 @@ export const getWordCategories = () => dispatch => {
     dispatch(setWordCategoriesLoading());
     axios
         .get('/api/word_categories')
-        .then(res =>
+        .then(res => {
             dispatch({
                 type: GET_WORD_CATEGORIES,
                 payload: res.data
-            })
+            })}
         )
 };
 

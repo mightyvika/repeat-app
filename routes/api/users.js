@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
@@ -32,7 +34,9 @@ router.post('/', (req, res) => {
             const newUser = new User({
                 name,
                 email,
-                password
+                password,
+                created_at: new Date(),
+                updated_at: new Date()
             })
 
             bcrypt.genSalt(10, (err, salt) => {
@@ -60,6 +64,25 @@ router.post('/', (req, res) => {
                         })
                 })
             })
+        })
+});
+
+// @route POST api/users
+// @desc Add Wodr Category To User
+// @access Public
+router.post('/word_category', (req, res) => {
+
+    let { userId, categoryId } = req.body;
+
+    if (!userId || !categoryId) {
+        return res.status(400).json({ message: 'Заполните все поля' });
+    }
+    console.log(userId, categoryId)
+    User.findByIdAndUpdate(userId,
+        { "$push": { "categories": categoryId } },
+        { "new": true, "upsert": true })
+            .then(res => {
+                console.log(res)
         })
 });
 

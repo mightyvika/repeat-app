@@ -16,9 +16,16 @@ const UserSchema = new Schema({
         required: true
     },
     categories: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'WordCategory'
+        type: String
     }],
+    created_at: {
+        type: Date,
+        default: Date()
+    },
+    updated_at: {
+        type: Date,
+        default: Date()
+    }
 });
 
 module.exports = User = mongoose.model('user', UserSchema);

@@ -22,7 +22,10 @@ class WordCategories extends React.Component{
     }
 
     onToggleCategory = (categoryId) => {
-        this.props.toggleUserCategory('1', categoryId);
+        if (this.props.user._id) {
+            console.log('fofof', this.props.user, this.props.user._id, categoryId)
+            this.props.toggleUserCategory(this.props.user._id, categoryId);
+        }
     }
 
     // toggleUserCategory = (itemId) => {
@@ -42,9 +45,12 @@ class WordCategories extends React.Component{
             <div>
                 {wordCategories.map((item) =>
                     (<div>
-                        <div className="category-item" onClick={this.onToggleCategory.bind(this, item.id)}>
+                        <div className="category-item" onClick={this.onToggleCategory.bind(this, item._id)}>
                             <div className="category-item__icon"><img src="../../logo192.png"/></div>
                             <div>{item.name}</div>
+                            {this.props.user && this.props.user.categories.includes(item.id) ? (
+                                <div className="category-item__check-icon"><Check/></div>
+                            ) : null}
                         </div>
                     </div>)
                 )}
@@ -60,7 +66,7 @@ WordCategories.propTypes = {
 
 const mapStateToProps = (state) => {
     console.log(state)
-    return {wordCategories: state.wordCategories}
+    return {wordCategories: state.wordCategories, user: state.auth.user}
 };
 
 export default connect(mapStateToProps, { getWordCategories, toggleUserCategory })(WordCategories);
