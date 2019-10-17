@@ -6,14 +6,15 @@ import {
     LOGIN_SUCCESS,
     LOGOUT_SUCCESS,
     REGISTER_FAIL,
-    REGISTER_SUCCESS
+    REGISTER_SUCCESS, ADD_WORD_CATEGORY_TO_USER, REMOVE_WORD_CATEGORY_FROM_USER
 } from '../actions/types';
 
 const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
     isLoading: false,
-    user: null
+    user: null,
+    userCategories: []
 };
 
 export default function (state = initialState, action) {
@@ -28,7 +29,8 @@ export default function (state = initialState, action) {
                 ...state,
                 isLoading: false,
                 isAuthenticated: true,
-                user: action.payload
+                user: action.payload,
+                userCategories: action.payload.categories
             };
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
@@ -48,6 +50,7 @@ export default function (state = initialState, action) {
                 ...state,
                 token: null,
                 user: null,
+                userCategories: null,
                 isAuthenticated: false,
                 isLoading: false
             };

@@ -5,11 +5,15 @@ import RegistrationModal from './auth/RegistrationModal';
 import Logout from './auth/Logout';
 
 import './AppNavbar.css';
+import LoginModal from "./auth/LoginModal";
 
 function AppNavbar() {
     return (
         <nav>
             <ul className="menu-nav">
+                <li className="menu-nav__icon">
+                    <LoginModal />
+                </li>
                 <li className="menu-nav__icon">
                     <RegistrationModal />
                 </li>

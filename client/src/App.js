@@ -23,6 +23,7 @@ class App extends React.Component {
             <Provider store={store}>
                 <div className="App">
                     <Router>
+                        {store.auth && store.auth.user? <div>hrllo</div>: <div>olll</div>}
                         <div className="container">
                             <Route path="/" exact component={LearningWords}/>
                             <Route path="/categories/" component={WordCategories}/>

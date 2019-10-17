@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const secret = require('../../config/keys').JWTSecret;
+const secret = process.env.JWT_SECRET;
 
 const User = require('../../models/User');
 
@@ -47,7 +47,7 @@ router.post('/', (req, res) => {
                         .then(user => {
                             jwt.sign(
                                 {id: user.id},
-                                require('../../config/keys').JWTSecret,
+                                process.env.JWT_SECRET,
                                 {expiresIn: 36000},
                                 (err, token) => {
                                     if (err) throw err;
@@ -56,7 +56,8 @@ router.post('/', (req, res) => {
                                         user: {
                                             id: user.id,
                                             name: user.name,
-                                            email: user.email
+                                            email: user.email,
+                                            categories: user.categories
                                         }
                                     })
                                 }
@@ -68,7 +69,7 @@ router.post('/', (req, res) => {
 });
 
 // @route POST api/users
-// @desc Add Wodr Category To User
+// @desc Add Word Category To User
 // @access Public
 router.post('/word_category', (req, res) => {
 
@@ -83,6 +84,45 @@ router.post('/word_category', (req, res) => {
         { "new": true, "upsert": true })
             .then(res => {
                 console.log(res)
+        })
+});
+
+// @route POST api/users
+// @desc Add Word Category To User
+// @access Public
+router.post('/word_category/add', (req, res) => {
+
+    let { userId, categoryId } = req.body;
+
+    if (!userId || !categoryId) {
+        return res.status(400).json({ message: 'Заполните все поля' });
+    }
+    console.log(userId, categoryId)
+    User.findByIdAndUpdate(userId,
+        { "$push": { "categories": categoryId } },
+        { "new": true, "upsert": true })
+        .then(result => {
+            console.log(result)
+            res.json({categories: result.categories})
+        })
+});
+
+// @route POST api/users
+// @desc Add Word Category To User
+// @access Public
+router.post('/word_category/remove', (req, res) => {
+
+    let { userId, categoryId } = req.body;
+
+    if (!userId || !categoryId) {
+        return res.status(400).json({ message: 'Заполните все поля' });
+    }
+    console.log(userId, categoryId)
+    User.findByIdAndUpdate(userId,
+        { "$pull": { "categories": categoryId } })
+        .then(result => {
+            console.log(result)
+            res.json({categories: result.categories})
         })
 });
 

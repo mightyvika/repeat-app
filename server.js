@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express();
 
@@ -7,7 +9,7 @@ app.use(express.json());
 
 //DB Config
 
-const db = require('./config/keys').mongoURI;
+const db = process.env.MONGO_URI;
 
 //Connect to Mongo
 
