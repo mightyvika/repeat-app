@@ -2,7 +2,7 @@ import React from 'react';
 import { MdCheckBox as Check, MdCheckBoxOutlineBlank as EmptyCheck } from "react-icons/md";
 import { connect } from 'react-redux';
 import { getWordCategories } from "../actions/wordCategoriesActions";
-import { toggleUserCategory, addUserCategory, removeUserCategory } from "../actions/userActions";
+import { addUserCategory, removeUserCategory } from "../actions/authActions";
 import PropTypes from 'prop-types';
 
 import './WordCategories.css';
@@ -68,8 +68,7 @@ WordCategories.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {wordCategories: state.wordCategories, user: state.auth.user, userCategories: state.auth.userCategories}
 };
 
-export default connect(mapStateToProps, { getWordCategories, toggleUserCategory, removeUserCategory, addUserCategory })(WordCategories);
+export default connect(mapStateToProps, { getWordCategories, removeUserCategory, addUserCategory })(WordCategories);

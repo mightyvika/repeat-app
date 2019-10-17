@@ -54,6 +54,18 @@ export default function (state = initialState, action) {
                 isAuthenticated: false,
                 isLoading: false
             };
+        case ADD_WORD_CATEGORY_TO_USER:
+            console.log('work', { ...state }, action.payload);
+            return {
+                ...state,
+                userCategories: [... action.payload.categories ]
+            };
+        case REMOVE_WORD_CATEGORY_FROM_USER:
+            console.log('work remove4', [... action.payload.categories ]);
+            return {
+                ...state,
+                userCategories: [... action.payload.categories ]
+            };
         default:
             return { ...state }
     }

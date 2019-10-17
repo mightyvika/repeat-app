@@ -8,7 +8,7 @@ import {
     REGISTER_SUCCESS,
     LOGOUT_SUCCESS,
     LOGIN_SUCCESS,
-    USER_LOADING, USER_LOADED
+    USER_LOADING, USER_LOADED, ADD_WORD_CATEGORY_TO_USER, REMOVE_WORD_CATEGORY_FROM_USER
 } from './types';
 
 export const loadUser = () => (dispatch, getState) => {
@@ -81,4 +81,44 @@ export const tokenConfig = getState => {
     }
 
     return config;
+};
+
+export const addUserCategory = (categoryId) => (dispatch, getState) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    const userId = getState().auth.user._id;
+    const body = JSON.stringify({userId, categoryId});
+    axios.post('/api/users/word_category/add', body, tokenConfig(getState))
+        .then(res => {
+            console.log(res)
+            dispatch({
+                type: ADD_WORD_CATEGORY_TO_USER,
+                payload: {categories: res.data.categories}
+            })
+
+        })
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status));
+        })
+};
+
+export const removeUserCategory = (categoryId) => (dispatch, getState) => {
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    const userId = getState().auth.user._id;
+    const body = JSON.stringify({userId, categoryId});
+    axios.post('/api/users/word_category/remove', body, tokenConfig(getState))
+        .then(res => dispatch({
+            type: REMOVE_WORD_CATEGORY_FROM_USER,
+            payload: {categories: res.data.categories}
+        }))
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status));
+        })
 };
