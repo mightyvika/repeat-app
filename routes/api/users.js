@@ -102,7 +102,6 @@ router.post('/word_category/add', (req, res) => {
         { "$push": { "categories": categoryId } },
         { "new": true, "upsert": true })
         .then(result => {
-            console.log(result)
             res.json({categories: result.categories})
         })
 });
@@ -117,11 +116,9 @@ router.post('/word_category/remove', (req, res) => {
     if (!userId || !categoryId) {
         return res.status(400).json({ message: 'Заполните все поля' });
     }
-    console.log(userId, categoryId)
     User.findByIdAndUpdate(userId,
-        { "$pull": { "categories": categoryId } })
-        .then(result => {
-            console.log(result)
+        { "$pull": { "categories": categoryId } }, {new: true})
+        .then((result) => {
             res.json({categories: result.categories})
         })
 });

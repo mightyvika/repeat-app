@@ -1,4 +1,5 @@
-import {ADD_WORD_CATEGORY_TO_USER, REMOVE_WORD_CATEGORY_FROM_USER} from '../actions/types';
+    import {GET_LEARNING_WORDS, GET_USER_LEARNING_WORDS} from "../actions/types";
+
 
 const initialState = {
     _id: null,
@@ -9,11 +10,11 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case ADD_WORD_CATEGORY_TO_USER:{
+        case GET_LEARNING_WORDS:{
             console.log('work', { ...state }, action.payload)
             return { ...state, categories: [... action.payload.categories ]};
         }
-        case REMOVE_WORD_CATEGORY_FROM_USER: {
+        case GET_USER_LEARNING_WORDS: {
             return { ...state, categories: [... action.payload.categories ]};
         }
         default:

@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
-import LearningWords from './components/LearningWords';
+import LearningWords from './components/LearningWords/LearningWords';
 import WordCategories from './components/WordCategories';
 import Statistics from './components/Statistics';
 import Settings from './components/Settings';
@@ -21,9 +21,8 @@ class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <div className="App">
+                <div className="main">
                     <Router>
-                        {store.auth && store.auth.user? <div>hrllo</div>: <div>olll</div>}
                         <div className="container">
                             <Route path="/" exact component={LearningWords}/>
                             <Route path="/categories/" component={WordCategories}/>

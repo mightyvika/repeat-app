@@ -1,0 +1,29 @@
+.learning-words-container {
+    height: calc(100vh - 90px);;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.word-card {
+    background-color: #edc7b7;
+    border-radius: 20px;
+    width: 300px;
+}
+
+.word-card__word-container {
+    padding: 30px 30px 0px 30px;
+}
+
+.word-card__buttons-container {
+    display: flex;
+}
+
+.word-card__button {
+    border-top: 1px solid #ac3b61;
+    padding: 10px 20px;
+}
+
+.word-card__button:nth-child(1) {
+    border-right: 1px solid #ac3b61;
+}
