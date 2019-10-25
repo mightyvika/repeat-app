@@ -3,23 +3,24 @@ import {GET_LEARNING_WORDS, GET_USER_LEARNING_WORDS} from "./types";
 import {returnErrors} from "./errorAction";
 import {tokenConfig} from "./authActions";
 
-export const getWordsForLearning = (userCategories, learnedWords = [], knownWords = []) => (dispatch, getState) => {
+export const getWordsForLearning = (userCategories, learnedWords = [], knownWords = []) => (dispatch) => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
         }
     };
-    const userId = getState().auth.user._id;
     let excludeWords = [... new Set(learnedWords.concat(knownWords))]
-    const body = JSON.stringify({userId, userCategories, excludeWords});
-    axios.post('/api/words/get_words', body, tokenConfig(getState))
-        .then(res => dispatch({
+    const body = JSON.stringify({userCategories, excludeWords});
+    console.log(userCategories)
+    axios.get('/api/words/get_words', {params: {userCategories, excludeWords}})
+        .then(res => {console.log(res.data);dispatch({
                 type: GET_LEARNING_WORDS,
-                payload: {learningWords: res.data.words}
-            })
+                payload: {words: res.data}
+            })}
         )
         .catch(err => {
-            dispatch(returnErrors(err.response.data, err.response.status));
+            // dispatch(returnErrors(err.response.data, err.response.status));
+            console.log(err)
         })
 };
 
@@ -29,12 +30,11 @@ export const getUserLearningWords = (userLearningWords) => (dispatch, getState) 
             'Content-Type': 'application/json'
         }
     };
-    const userId = getState().auth.user._id;
-    const body = JSON.stringify({userId, userLearningWords});
-    axios.post('/api/words/get_user_words', body, tokenConfig(getState))
+    const body = JSON.stringify({userLearningWords});
+    axios.get('/api/words/get_user_words', body)
         .then(res => dispatch({
                 type: GET_USER_LEARNING_WORDS,
-                payload: {userLearningWords: res.data.words}
+                payload: {words: res.data.words}
             })
         )
         .catch(err => {

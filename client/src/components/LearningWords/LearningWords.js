@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import {addWordToKnownWords, addWordToLearningWords} from "../../actions/authActions";
+import {getWordsForLearning, getUserLearningWords} from "../../actions/wordsAction";
 
 import './LearningWords.css';
 
@@ -10,12 +12,18 @@ class LearningWords extends React.Component{
         super(props);
         this.state = {
             words: [],
-            userCategories: []
+            // userCategories: []
         }
     }
 
     componentDidMount() {
         const self = this;
+        let { user } = this.props;
+        console.log(this.props.user, this.props.userCategories, this.props, user, this)
+        if (this.props.userCategories) {
+            const words = this.props.getWordsForLearning(this.props.userCategories)
+            console.log(words)
+        }
     }
 
     render() {
@@ -37,4 +45,8 @@ class LearningWords extends React.Component{
     }
 }
 
-export default connect(null, {addWordToLearningWords, addWordToKnownWords, getWordsForLearning, getUserLearningWords})(LearningWords);
+const mapStateToProps = (state) => {
+    return {user: state.auth.user, userCategories: state.auth.userCategories}
+};
+
+export default connect(mapStateToProps, {addWordToLearningWords, addWordToKnownWords, getWordsForLearning, getUserLearningWords})(LearningWords);

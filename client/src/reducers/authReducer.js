@@ -6,7 +6,7 @@ import {
     LOGIN_SUCCESS,
     LOGOUT_SUCCESS,
     REGISTER_FAIL,
-    REGISTER_SUCCESS, ADD_WORD_CATEGORY_TO_USER, REMOVE_WORD_CATEGORY_FROM_USER
+    REGISTER_SUCCESS, ADD_WORD_CATEGORY_TO_USER, REMOVE_WORD_CATEGORY_FROM_USER, ADD_WORD_TO_LEARNING_WORDS, ADD_WORD_TO_KNOWN_WORDS
 } from '../actions/types';
 
 const initialState = {
@@ -55,16 +55,26 @@ export default function (state = initialState, action) {
                 isLoading: false
             };
         case ADD_WORD_CATEGORY_TO_USER:
-            console.log('work', { ...state }, action.payload);
             return {
                 ...state,
                 userCategories: [... action.payload.categories ]
             };
         case REMOVE_WORD_CATEGORY_FROM_USER:
-            console.log('work remove4', [... action.payload.categories ]);
             return {
                 ...state,
                 userCategories: [... action.payload.categories ]
+            };
+        case ADD_WORD_TO_LEARNING_WORDS:
+            console.log('work learn', [... action.payload.words ]);
+            return {
+                ...state,
+                user: {...state.user, learnedWords: [... action.payload.words ]}
+            };
+        case ADD_WORD_TO_KNOWN_WORDS:
+            console.log('work known', [... action.payload.words ]);
+            return {
+                ...state,
+                user: {...state.user, knownWords: [... action.payload.words ]}
             };
         default:
             return { ...state }

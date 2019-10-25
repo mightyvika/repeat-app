@@ -6,24 +6,15 @@ const WordSchema = new Schema({
         type: String
     },
     categories: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'WordCategory'
+        type: String,
     }],
     translation: {
         type: String,
         required: true
     },
-    name: {
+    word: {
         type: String,
         required: true
-    },
-    created_at: {
-        type: Date,
-        default: Date()
-    },
-    updated_at: {
-        type: Date,
-        default: Date()
     }
 });
 
