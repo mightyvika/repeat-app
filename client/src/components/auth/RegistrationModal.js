@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { registerUser } from '../../actions/authActions';
+import { registerUser } from '../../redux/actions/authActions';
 
 class RegistrationModal extends React.Component {
     state = {

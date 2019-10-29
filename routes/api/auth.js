@@ -12,7 +12,7 @@ const User = require('../../models/User');
 // @desc Auth user
 // @access Public
 router.post('/', (req, res) => {
-    let { email, password } = req.body;
+    const { email, password } = req.body;
 
     if (!email || !password) {
         return res.status(400).json({ message: 'Заполните все поля' });

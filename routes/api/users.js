@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 // @desc Create User
 // @access Public
 router.post('/', (req, res) => {
-    let { name, email, password } = req.body;
+    const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
         return res.status(400).json({ message: 'Заполните все поля' });
@@ -73,7 +73,7 @@ router.post('/', (req, res) => {
 // @access Public
 router.post('/word_category', (req, res) => {
 
-    let { userId, categoryId } = req.body;
+    const { userId, categoryId } = req.body;
 
     if (!userId || !categoryId) {
         return res.status(400).json({ message: 'Заполните все поля' });
@@ -92,7 +92,7 @@ router.post('/word_category', (req, res) => {
 // @access Public
 router.post('/word_category/add', (req, res) => {
 
-    let { userId, categoryId } = req.body;
+    const { userId, categoryId } = req.body;
 
     if (!userId || !categoryId) {
         return res.status(400).json({ message: 'Заполните все поля' });
@@ -111,7 +111,7 @@ router.post('/word_category/add', (req, res) => {
 // @access Public
 router.post('/word_category/remove', (req, res) => {
 
-    let { userId, categoryId } = req.body;
+    const { userId, categoryId } = req.body;
 
     if (!userId || !categoryId) {
         return res.status(400).json({ message: 'Заполните все поля' });

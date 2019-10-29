@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { loginUser } from '../../actions/authActions';
+import { loginUser } from '../../redux/actions/authActions';
 
 class LoginModal extends React.Component {
     state = {

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MdSettings as Settings, MdSettingsEthernet as Learning, MdFormatListBulleted as Categories, MdShowChart as Statistics, MdPersonAdd } from "react-icons/md";
-import RegistrationModal from './auth/RegistrationModal';
-import Logout from './auth/Logout';
+import RegistrationModal from '../auth/RegistrationModal';
+import Logout from '../auth/Logout';
 
 import './AppNavbar.css';
-import LoginModal from "./auth/LoginModal";
+import LoginModal from "../auth/LoginModal";
 
 function AppNavbar() {
     return (

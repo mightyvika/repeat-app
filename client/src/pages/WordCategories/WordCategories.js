@@ -1,8 +1,8 @@
 import React from 'react';
 import { MdCheckBox as Check, MdCheckBoxOutlineBlank as EmptyCheck } from "react-icons/md";
 import { connect } from 'react-redux';
-import { getWordCategories } from "../actions/wordCategoriesActions";
-import { addUserCategory, removeUserCategory } from "../actions/authActions";
+import { getWordCategories } from "../../redux/actions/wordCategoriesActions";
+import { addUserCategory, removeUserCategory } from "../../redux/actions/authActions";
 import PropTypes from 'prop-types';
 
 import './WordCategories.css';

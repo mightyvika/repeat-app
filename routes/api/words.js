@@ -7,7 +7,7 @@ const Word = require('../../models/Word');
 // @desc Get All Words
 // @access Public
 router.get('/get_words', (req, res) => {
-    let { userCategories=[], excludeWords=[] } = req.query;
+    const { userCategories=[], excludeWords=[] } = req.query;
     console.log(userCategories, excludeWords)
     // let query = {$and}
     // if (userCategories.length !== 0){
@@ -24,7 +24,7 @@ router.get('/get_words', (req, res) => {
 // @desc Get All Words
 // @access Public
 router.get('/get_user_words', (req, res) => {
-    let { wordsId } = req.params;
+    const { wordsId } = req.params;
     Word.find({_id: {$in: wordsId}})
         .sort({ created_at: -1 })
         .then(words => {console.log('user words',words);res.json(words)})

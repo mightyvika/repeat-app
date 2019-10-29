@@ -4,14 +4,14 @@ import {Provider} from 'react-redux';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
-import LearningWords from './components/LearningWords/LearningWords';
-import WordCategories from './components/WordCategories';
-import Statistics from './components/Statistics';
-import Settings from './components/Settings';
-import AppNavbar from './components/AppNavbar';
+import LearningWords from './pages/LearningWords/LearningWords';
+import WordCategories from './pages/WordCategories/WordCategories';
+import Statistics from './pages/Statistics/Statistics';
+import Settings from './pages/Settings/Settings';
+import AppNavbar from './components/AppNavbar/AppNavbar';
 import store from './store';
 
-import {loadUser} from './actions/authActions';
+import {loadUser} from './redux/actions/authActions';
 
 class App extends React.Component {
     componentDidMount() {
