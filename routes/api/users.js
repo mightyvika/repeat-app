@@ -123,4 +123,44 @@ router.post('/word_category/remove', (req, res) => {
         })
 });
 
+// @route POST api/users
+// @desc Add Word Category To User
+// @access Public
+router.post('/words', (req, res) => {
+
+    const { userId, wordId, type } = req.body;
+
+    if (!userId || !wordId || !type) {
+        return res.status(400).json({ message: 'Field is missing' });
+    }
+    console.log(userId, wordId)
+    switch (type) {
+        case 'learning':
+            User.findByIdAndUpdate(userId,
+                { "$push": { "wordsToLearn": wordId } },
+                { "new": true, "upsert": true })
+                .then(res => {
+                    res.json({words: res.wordsToLearn})
+                });
+            break;
+        case 'learned':
+            User.findByIdAndUpdate(userId,
+                { "$push": { "learnedWords": wordId } },
+                { "new": true, "upsert": true })
+                .then(res => {
+                    res.json({words: res.learnedWords})
+                });
+            break;
+        case 'known':
+            User.findByIdAndUpdate(userId,
+                { "$push": { "knownWords": wordId } },
+                { "new": true, "upsert": true })
+                .then(res => {
+                    res.json({words: res.knownWords})
+                });
+            break;
+    }
+
+});
+
 module.exports = router;

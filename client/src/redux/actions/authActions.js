@@ -8,7 +8,13 @@ import {
     REGISTER_SUCCESS,
     LOGOUT_SUCCESS,
     LOGIN_SUCCESS,
-    USER_LOADING, USER_LOADED, ADD_WORD_CATEGORY_TO_USER, REMOVE_WORD_CATEGORY_FROM_USER
+    USER_LOADING,
+    USER_LOADED,
+    ADD_WORD_CATEGORY_TO_USER,
+    REMOVE_WORD_CATEGORY_FROM_USER,
+    ADD_WORD_TO_LEARNING_WORDS,
+    ADD_WORD_TO_LEARNED_WORDS,
+    ADD_WORD_TO_KNOWN_WORDS
 } from './types';
 
 export const loadUser = () => (dispatch, getState) => {
@@ -121,18 +127,13 @@ export const removeUserCategory = (categoryId) => (dispatch, getState) => {
         })
 };
 
-export const addWordToLearningWords = (categoryId) => (dispatch, getState) => {
-    const config = {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    };
+export const addWordToLearningWords = (wordId) => (dispatch, getState) => {
     const userId = getState().auth.user._id;
-    const body = JSON.stringify({userId, categoryId});
-    axios.post('/api/users/word_category/add', body, tokenConfig(getState))
+    const body = JSON.stringify({userId, wordId, type: 'learning'});
+    axios.post('/api/users/words', body, tokenConfig(getState))
         .then(res => dispatch({
-                type: ADD_WORD_CATEGORY_TO_USER,
-                payload: {categories: res.data.categories}
+                type: ADD_WORD_TO_LEARNING_WORDS,
+                payload: {words: res.data.categories}
             })
         )
         .catch(err => {
@@ -140,18 +141,27 @@ export const addWordToLearningWords = (categoryId) => (dispatch, getState) => {
         })
 };
 
-export const addWordToKnownWords = (categoryId) => (dispatch, getState) => {
-    const config = {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    };
+export const addWordToLearnedWords = (wordId) => (dispatch, getState) => {
     const userId = getState().auth.user._id;
-    const body = JSON.stringify({userId, categoryId});
-    axios.post('/api/users/word_category/add', body, tokenConfig(getState))
+    const body = JSON.stringify({userId, wordId, type: 'learned'});
+    axios.post('/api/users/words', body, tokenConfig(getState))
         .then(res => dispatch({
-                type: ADD_WORD_CATEGORY_TO_USER,
-                payload: {categories: res.data.categories}
+                type: ADD_WORD_TO_LEARNED_WORDS,
+                payload: {words: res.data.categories}
+            })
+        )
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status));
+        })
+};
+
+export const addWordToKnownWords = (wordId) => (dispatch, getState) => {
+    const userId = getState().auth.user._id;
+    const body = JSON.stringify({userId, wordId, type: 'known'});
+    axios.post('/api/users/words', body, tokenConfig(getState))
+        .then(res => dispatch({
+                type: ADD_WORD_TO_KNOWN_WORDS,
+                payload: {words: res.data.categories}
             })
         )
         .catch(err => {

@@ -38,11 +38,12 @@ class LearningWords extends React.Component{
     }
 
     setWordAsKnown(wordId){
-        this.setState({words: this.state.words})
+        this.setState({words: this.state.words.filter(word => word._id !== wordId)})
         this.props.addWordToKnownWords(wordId)
     }
 
     learnWord(wordId){
+        this.setState({words: this.state.words.filter(word => word._id !== wordId)})
         this.props.addWordToLearningWords(wordId)
     }
 
@@ -67,7 +68,7 @@ class LearningWords extends React.Component{
                 )
             } else {
                 return (
-                    <div></div>
+                    <div>Сейчас нет слов для запоминания</div>
                 )
             }
 
@@ -81,7 +82,7 @@ class LearningWords extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-    return {user: state.auth.user, userCategories: state.auth.userCategories, wordsForLearning: state.words.wordsForLearning}
+    return {user: state.auth.user, userCategories: state.auth.userCategories, wordsForLearning: state.words.wordsForLearning, userLearningWords: state.auth.wordsToLearn}
 };
 
 export default connect(mapStateToProps, {addWordToLearningWords, addWordToKnownWords, getWordsForLearning, getUserLearningWords})(LearningWords);
