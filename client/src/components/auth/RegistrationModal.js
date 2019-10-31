@@ -66,7 +66,7 @@ class RegistrationModal extends React.Component {
     render() {
         return (
             <div>
-                <NavLink onClick={this.toggle} href="#">Register</NavLink>
+                <NavLink onClick={this.toggle} href="#">Зарегистрироваться</NavLink>
 
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>Зарегистрироваться</ModalHeader>

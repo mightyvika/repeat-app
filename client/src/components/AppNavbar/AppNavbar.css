@@ -5,13 +5,17 @@
     justify-content: center;
 }
 
+.menu-nav {
+    margin-bottom: 0;
+}
+
 .menu-nav__icon svg {
     width: 2rem;
     height: 2rem;
     margin-right: 10px;
     margin-left: 10px;
-    fill: #fff;
-    background-color: #000;
+    fill: #edc7b7;
+    background-color: #ac3b61;
     padding: 10px;
     border-radius: 50px;
 }

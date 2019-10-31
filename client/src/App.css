@@ -1,6 +1,6 @@
 footer {
-    position: fixed;
-    height: 90px;
+    /*position: fixed;*/
+    /*height: 80px;*/
     right: 0;
     bottom: 0;
     left: 0;
@@ -8,9 +8,17 @@ footer {
 }
 
 .main {
-    /*background-color: #edc7b7;*/
-    background-color: #eee2dc;
+    background-color: #edc7b7;
+    /*background-color: #eee2dc;*/
     /*background-color: #bab2b5;*/
     /*background-color: #123c69;*/
     /*background-color: #ac3b61;*/
+}
+
+header {
+    background-color: #ac3b61;
+}
+
+header .menu-nav__item a {
+    color: #edc7b7;
 }

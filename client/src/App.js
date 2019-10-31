@@ -9,6 +9,9 @@ import WordCategories from './pages/WordCategories/WordCategories';
 import Statistics from './pages/Statistics/Statistics';
 import Settings from './pages/Settings/Settings';
 import AppNavbar from './components/AppNavbar/AppNavbar';
+import RegistrationModal from './components/auth/RegistrationModal';
+import Logout from './components/auth/Logout';
+import LoginModal from "./components/auth/LoginModal";
 import store from './store';
 
 import {loadUser} from './redux/actions/authActions';
@@ -23,6 +26,19 @@ class App extends React.Component {
             <Provider store={store}>
                 <div className="main">
                     <Router>
+                        <header>
+                            <ul className="menu-nav">
+                            <li className="menu-nav__item">
+                                <LoginModal />
+                            </li>
+                            <li className="menu-nav__item">
+                                <RegistrationModal />
+                            </li>
+                            <li className="menu-nav__item">
+                                <Logout />
+                            </li>
+                            </ul>
+                        </header>
                         <div className="container">
                             <Route path="/" exact component={LearningWords}/>
                             <Route path="/categories/" component={WordCategories}/>
