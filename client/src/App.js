@@ -28,18 +28,18 @@ class App extends React.Component {
                     <Router>
                         <header>
                             <ul className="menu-nav">
-                            <li className="menu-nav__item">
-                                <LoginModal />
-                            </li>
-                            <li className="menu-nav__item">
-                                <RegistrationModal />
-                            </li>
-                            <li className="menu-nav__item">
-                                <Logout />
-                            </li>
+                                <li className="menu-nav__item">
+                                    <Logout/>
+                                </li>
+                                <li className="menu-nav__item">
+                                    <LoginModal/>
+                                </li>
+                                <li className="menu-nav__item">
+                                    <RegistrationModal/>
+                                </li>
                             </ul>
                         </header>
-                        <div className="container">
+                        <div className="container main-content">
                             <Route path="/" exact component={LearningWords}/>
                             <Route path="/categories/" component={WordCategories}/>
                             <Route path="/statistics/" component={Statistics}/>

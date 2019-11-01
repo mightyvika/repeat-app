@@ -139,24 +139,25 @@ router.post('/words', (req, res) => {
             User.findByIdAndUpdate(userId,
                 { "$push": { "wordsToLearn": wordId } },
                 { "new": true, "upsert": true })
-                .then(res => {
-                    res.json({words: res.wordsToLearn})
+                .then(result => {
+                    res.json({words: result.wordsToLearn})
                 });
             break;
         case 'learned':
             User.findByIdAndUpdate(userId,
                 { "$push": { "learnedWords": wordId } },
                 { "new": true, "upsert": true })
-                .then(res => {
-                    res.json({words: res.learnedWords})
+                .then(result => {
+                    res.json({words: result.learnedWords})
                 });
             break;
         case 'known':
             User.findByIdAndUpdate(userId,
                 { "$push": { "knownWords": wordId } },
-                { "new": true, "upsert": true })
-                .then(res => {
-                    res.json({words: res.knownWords})
+                { "new": true})
+                .then(result => {
+                    console.log(result)
+                    res.json({words: result.knownWords})
                 });
             break;
     }

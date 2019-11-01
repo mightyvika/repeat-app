@@ -133,7 +133,7 @@ export const addWordToLearningWords = (wordId) => (dispatch, getState) => {
     axios.post('/api/users/words', body, tokenConfig(getState))
         .then(res => dispatch({
                 type: ADD_WORD_TO_LEARNING_WORDS,
-                payload: {words: res.data.categories}
+                payload: {words: res.data.words}
             })
         )
         .catch(err => {
@@ -147,7 +147,7 @@ export const addWordToLearnedWords = (wordId) => (dispatch, getState) => {
     axios.post('/api/users/words', body, tokenConfig(getState))
         .then(res => dispatch({
                 type: ADD_WORD_TO_LEARNED_WORDS,
-                payload: {words: res.data.categories}
+                payload: {words: res.data.words}
             })
         )
         .catch(err => {
@@ -161,7 +161,7 @@ export const addWordToKnownWords = (wordId) => (dispatch, getState) => {
     axios.post('/api/users/words', body, tokenConfig(getState))
         .then(res => dispatch({
                 type: ADD_WORD_TO_KNOWN_WORDS,
-                payload: {words: res.data.categories}
+                payload: {words: res.data.words}
             })
         )
         .catch(err => {

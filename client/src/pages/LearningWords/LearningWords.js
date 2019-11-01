@@ -20,31 +20,48 @@ class LearningWords extends React.Component{
         let { user } = this.props;
         console.log(this.props.user, this.props.userCategories, this.props, user, this)
         if (this.props.userCategories) {
-            const words = this.props.getWordsForLearning(this.props.userCategories)
-            console.log(words)
+            this.getLearningWords()
         }
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.userCategories !== prevProps.userCategories) {
-            this.props.getWordsForLearning(this.props.userCategories)
+            this.getLearningWords();
         }
         if (this.props.wordsForLearning !== prevProps.wordsForLearning){
             const words = [...this.props.wordsForLearning];
             this.setState({currentWord: words.pop(), words: words})
         }
-
-        console.log('this', this, '\nprev', prevProps)
     }
 
     setWordAsKnown(wordId){
-        this.setState({words: this.state.words.filter(word => word._id !== wordId)})
+        this.setState({words: this.state.words.filter(word => word._id !== wordId)}, () => {
+            if (this.state.words.length === 0) {
+                this.getLearningWords();
+            } else {
+                this.setNextWord();
+            }
+        });
         this.props.addWordToKnownWords(wordId)
     }
 
     learnWord(wordId){
-        this.setState({words: this.state.words.filter(word => word._id !== wordId)})
+        this.setState({words: this.state.words.filter(word => word._id !== wordId)}, () => {
+            if (this.state.words.length === 0) {
+                this.getLearningWords();
+            } else {
+                this.setNextWord();
+            }
+        });
         this.props.addWordToLearningWords(wordId)
+    }
+
+    setNextWord() {
+        this.setState({currentWord: this.state.words[0]})
+    }
+
+    getLearningWords() {
+        if (this.props.user) this.props.getWordsForLearning(this.props.userCategories, this.props.user.knownWords, this.props.user.wordsToLearn)
     }
 
     render() {

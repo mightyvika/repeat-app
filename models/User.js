@@ -18,6 +18,15 @@ const UserSchema = new Schema({
     categories: [{
         type: String
     }],
+    knownWords: [{
+        type: String
+    }],
+    wordsToLearn: [{
+        type: String
+    }],
+    learnedWords: [{
+        type: String
+    }],
     created_at: {
         type: Date,
         default: Date()
